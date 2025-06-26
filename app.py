@@ -9,7 +9,9 @@ import gdown
 app = Flask(__name__)
 
 MODEL_PATH = "model.h5"
-GOOGLE_DRIVE_FILE_ID = "YOUR_FILE_ID_HEREhttps://drive.google.com/file/d/1FLasE9vt-3YvyqmitnnXZ7DX_j_UUiBO/view?usp=drive_link"  # replace this with your actual file ID
+
+GOOGLE_DRIVE_FILE_ID = "1FLasE9vt-3YvyqmitnnXZ7DX_j_UUiBO"
+
 
 def download_model():
     if not os.path.exists(MODEL_PATH):
