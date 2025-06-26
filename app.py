@@ -12,19 +12,15 @@ MODEL_PATH = "model.h5"
 
 GOOGLE_DRIVE_FILE_ID = "16_nTplqDTOnnHlVUrjNS5jBvpXaKT7Q4"
 
+import subprocess
 
 def download_model():
     if not os.path.exists(MODEL_PATH):
-        print("Downloading model from Google Drive...")
+        print("Downloading model from Google Drive using wget fallback...")
         try:
-            gdown.download(
-    url="https://drive.google.com/uc?export=download&id=16_nTplqDTOnnHlVUrjNS5jBvpXaKT7Q4",
-    output=MODEL_PATH,
-    quiet=False,
-    fuzzy=True,
-    use_cookies=False
-)
-
+            url = "https://drive.google.com/uc?export=download&id=16_nTplqDTOnnHlVUrjNS5jBvpXaKT7Q4"
+            command = f"wget --no-check-certificate '{url}' -O {MODEL_PATH}"
+            subprocess.check_call(command, shell=True)
             if os.path.exists(MODEL_PATH):
                 print("Model downloaded successfully.")
             else:
@@ -33,9 +29,6 @@ def download_model():
         except Exception as e:
             print("Download failed:", e)
             exit(1)
-    else:
-        print("Model already exists.")
-
 
 # Download model before app starts
 download_model()
