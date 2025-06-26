@@ -17,7 +17,8 @@ GOOGLE_DRIVE_FILE_ID = "16_nTplqDTOnnHlVUrjNS5jBvpXaKT7Q4"
 def download_model():
     if not os.path.exists(MODEL_PATH):
         print("Downloading model from Google Drive...")
-        url = f"https://drive.google.com/uc?id={GOOGLE_DRIVE_FILE_ID}"
+        url = f"https://drive.google.com/uc?export=download&id={GOOGLE_DRIVE_FILE_ID}"
+
         gdown.download(url, MODEL_PATH, quiet=False)
         print("Model downloaded.")
     else:
