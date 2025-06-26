@@ -13,16 +13,22 @@ MODEL_PATH = "model.h5"
 GOOGLE_DRIVE_FILE_ID = "16_nTplqDTOnnHlVUrjNS5jBvpXaKT7Q4"
 
 
-
 def download_model():
     if not os.path.exists(MODEL_PATH):
         print("Downloading model from Google Drive...")
-        url = f"https://drive.google.com/uc?export=download&id={GOOGLE_DRIVE_FILE_ID}"
-
-        gdown.download(url, MODEL_PATH, quiet=False)
-        print("Model downloaded.")
+        try:
+            gdown.download(id=GOOGLE_DRIVE_FILE_ID, output=MODEL_PATH, quiet=False, use_cookies=False)
+            if os.path.exists(MODEL_PATH):
+                print("Model downloaded successfully.")
+            else:
+                print("Download attempted but model.h5 still not found.")
+                exit(1)
+        except Exception as e:
+            print("Download failed:", e)
+            exit(1)
     else:
         print("Model already exists.")
+
 
 # Download model before app starts
 download_model()
