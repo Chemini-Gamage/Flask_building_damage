@@ -10,7 +10,8 @@ app = Flask(__name__)
 
 MODEL_PATH = "model.h5"
 
-GOOGLE_DRIVE_FILE_ID = "1FLasE9vt-3YvyqmitnnXZ7DX_j_UUiBO"
+GOOGLE_DRIVE_FILE_ID = "16_nTplqDTOnnHlVUrjNS5jBvpXaKT7Q4"
+
 
 
 def download_model():
