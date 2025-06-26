@@ -14,18 +14,21 @@ GOOGLE_DRIVE_FILE_ID = "16_nTplqDTOnnHlVUrjNS5jBvpXaKT7Q4"
 
 import subprocess
 
+import requests
+
+MODEL_URL = "https://www.dropbox.com/scl/fi/0es9tt5806lp14q05hjyr/model.h5?rlkey=vfh7xoo61o1weq8phh9nr1mku&st=14iph1ox&dl=1"
+
 def download_model():
     if not os.path.exists(MODEL_PATH):
-        print("Downloading model from Google Drive using wget fallback...")
+        print("Downloading model from Dropbox...")
         try:
-            url = "https://drive.google.com/uc?export=download&id=16_nTplqDTOnnHlVUrjNS5jBvpXaKT7Q4"
-            command = f"wget --no-check-certificate '{url}' -O {MODEL_PATH}"
-            subprocess.check_call(command, shell=True)
-            if os.path.exists(MODEL_PATH):
-                print("Model downloaded successfully.")
-            else:
-                print("Download attempted but model.h5 still not found.")
+            response = requests.get(MODEL_URL)
+            with open(MODEL_PATH, 'wb') as f:
+                f.write(response.content)
+            if os.path.getsize(MODEL_PATH) < 10000:
+                print("Model file too small — download likely failed.")
                 exit(1)
+            print("Model downloaded successfully.")
         except Exception as e:
             print("Download failed:", e)
             exit(1)
