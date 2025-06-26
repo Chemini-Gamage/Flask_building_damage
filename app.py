@@ -32,6 +32,8 @@ def download_model():
 
 # Download model before app starts
 download_model()
+print(f"Model size: {os.path.getsize(MODEL_PATH)} bytes")
+
 
 # Load model
 model = load_model(MODEL_PATH)
